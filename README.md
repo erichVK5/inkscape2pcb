@@ -1,5 +1,5 @@
 # inkscape2pcb
-inkscape2pcb contains inkscape extension scripts that allow export if inkscape paths to pcb-rnd layouts (.lht) and gEDA PCB footprints (.fp)
+inkscape2pcb contains inkscape extension scripts that allow export of inkscape paths to pcb-rnd layouts (.lht) and gEDA PCB footprints (.fp)
 
 The scripts are based on the HPGL export script that ships with inkscape.
 
