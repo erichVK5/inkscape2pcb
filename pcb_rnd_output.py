@@ -49,10 +49,10 @@ class MyEffect(inkex.Effect):
                         action="store", type="int", 
                         dest="resolution", default=1000,
                         help="Resolution (dpi)")
-        self.OptionParser.add_option("-n", "--pen",
+        self.OptionParser.add_option("-t", "--thickness",
                         action="store", type="int",
-                        dest="pen", default=1,
-                        help="Pen number")
+                        dest="thickness", default=8,
+                        help="Line thickness")
         self.OptionParser.add_option("-p", "--plotInvisibleLayers",
                         action="store", type="inkbool", 
                         dest="plotInvisibleLayers", default="FALSE",
@@ -75,13 +75,12 @@ class MyEffect(inkex.Effect):
 		X = -1
 		Y = -1
                 for csp in sp:
-                    cmd = 'PD'
                     X = csp[1][0]
                     Y = csp[1][1]
                     if not first:
                         self.lht.append('       ha:line.%d {\n' % (self.lineCount))
 			self.lineCount = self.lineCount + 1
-                        self.lht.append('        x1=%dmil; y1=%dmil; x2=%dmil; y2=%dmil; thickness=10.0mil; clearance=40.0mil;\n' % (Xlast, Ylast, X, Y))
+                        self.lht.append('        x1=%dmil; y1=%dmil; x2=%dmil; y2=%dmil; thickness=%dmil; clearance=40.0mil;\n' % (Xlast, Ylast, X, Y, self.options.thickness))
                         self.lht.append('        ha:flags {\n         clearline=1\n        }\n       }\n')
 
                     Xlast = X
@@ -108,7 +107,7 @@ class MyEffect(inkex.Effect):
             self.groupmat.pop()
 
     def effect(self):
-        self.lht = ['# pcb-rnd layout exported from Inkscap']
+        self.lht = ['# pcb-rnd layout exported from Inkscape\n']
         self.lht.append(self.header)
         x0 = self.options.xOrigin
         y0 = self.options.yOrigin

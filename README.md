@@ -13,6 +13,8 @@ On loading, inkscape will find the scripts, at which point the "Save As" menu wi
 
 Currently, the exporter only exports lines and paths as line elements.
 
+Line width can be specified in the export dialogue; 8mil is the default minimum (less than this is not necessarily supported by many fabs for silkscreens, for example), and can range up to 250mil. If this is not appropriate, the thickness can be changed further in pcb-rnd or gEDA PCB anyway. 
+
 Support for polygon export may be added in the future, if viable.
 
 Exported gEDA PCB footprints are natively supported by gEDA PCB, pcb-rnd, and KiCad.

@@ -46,10 +46,10 @@ class MyEffect(inkex.Effect):
                         action="store", type="int", 
                         dest="resolution", default=1000,
                         help="Resolution (dpi)")
-        self.OptionParser.add_option("-n", "--pen",
+        self.OptionParser.add_option("-t", "--thickness",
                         action="store", type="int",
-                        dest="pen", default=1,
-                        help="Pen number")
+                        dest="thickness", default=8,
+                        help="Line thickness (mil/thou)")
         self.OptionParser.add_option("-p", "--plotInvisibleLayers",
                         action="store", type="inkbool", 
                         dest="plotInvisibleLayers", default="FALSE",
@@ -72,11 +72,10 @@ class MyEffect(inkex.Effect):
 		X = -1
 		Y = -1
                 for csp in sp:
-                    cmd = 'PD'
                     X = csp[1][0]
                     Y = csp[1][1]
                     if not first:
-                        self.fp.append('\tElementLine(%d %d %d %d 8)\n' % (Xlast,Ylast,X,Y))
+                        self.fp.append('\tElementLine(%d %d %d %d %d)\n' % (Xlast,Ylast,X,Y,self.options.thickness))
                     Xlast = X
                     Ylast = Y
                     first = False
@@ -101,7 +100,7 @@ class MyEffect(inkex.Effect):
             self.groupmat.pop()
 
     def effect(self):
-        self.fp = ['# Element header should go here\n']
+        self.fp = ['# gEDA PCB footprint exported from Inkscape\n']
         self.fp.append(self.header)
         x0 = self.options.xOrigin
         y0 = self.options.yOrigin
@@ -116,7 +115,6 @@ class MyEffect(inkex.Effect):
         doc = self.document.getroot()
         self.process_group(doc)
         self.fp.append(self.footer)
-        self.fp.append('# exported element ends here \n')
 
 if __name__ == '__main__':   #pragma: no cover
     e = MyEffect()
