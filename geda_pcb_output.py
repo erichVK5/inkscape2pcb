@@ -104,7 +104,7 @@ class MyEffect(inkex.Effect):
         self.fp.append(self.header)
         x0 = self.options.xOrigin
         y0 = self.options.yOrigin
-        scale = float(self.options.resolution)/100
+        scale = float(self.options.resolution)/10
         self.options.flat *= scale
         mirror = 1.0
         if self.options.mirror:

@@ -80,7 +80,7 @@ class MyEffect(inkex.Effect):
                     if not first:
                         self.lht.append('       ha:line.%d {\n' % (self.lineCount))
 			self.lineCount = self.lineCount + 1
-                        self.lht.append('        x1=%dmil; y1=%dmil; x2=%dmil; y2=%dmil; thickness=%dmil; clearance=40.0mil;\n' % (Xlast, Ylast, X, Y, self.options.thickness))
+                        self.lht.append('        x1=%dmil; y1=%dmil; x2=%dmil; y2=%dmil; thickness=%dmil; clearance=40.0mil;\n' % (Xlast/100.0, Ylast/100.0, X/100.0, Y/100.0, self.options.thickness))
                         self.lht.append('        ha:flags {\n         clearline=1\n        }\n       }\n')
 
                     Xlast = X
@@ -111,7 +111,7 @@ class MyEffect(inkex.Effect):
         self.lht.append(self.header)
         x0 = self.options.xOrigin
         y0 = self.options.yOrigin
-        scale = float(self.options.resolution)/100
+        scale = float(self.options.resolution)/10
         self.options.flat *= scale
         mirror = 1.0
         if self.options.mirror:
