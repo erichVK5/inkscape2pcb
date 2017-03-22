@@ -15,6 +15,8 @@ Currently, the exporter only exports lines and paths as line elements.
 
 Line width can be specified in the export dialogue; 8mil is the default minimum (less than this is not necessarily supported by many fabs for silkscreens, for example), and can range up to 250mil. If this is not appropriate, the thickness can be changed further in pcb-rnd or gEDA PCB anyway. 
 
+Currently, the exporter exports to mil units, where 1px in Inkscape = 1 mil in the exported layout. It is recommended that any lines or nodes on lines needing to have a specific coordinates be created, and then each node individually clicked on within Inkscape to allow precise coordinates to be specified for each node. This is a more precise method for specifying geometry than simply clicking with the mouse.
+
 Support for polygon export may be added in the future, if viable.
 
 Exported gEDA PCB footprints are natively supported by gEDA PCB, pcb-rnd, and KiCad.
