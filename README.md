@@ -19,8 +19,12 @@ Currently, the exporter exports to mil units, where 1px in Inkscape = 1 mil in t
 
 Support for polygon export may be added in the future, if viable.
 
-Exported gEDA PCB footprints are natively supported by gEDA PCB, pcb-rnd, and KiCad.
+Exported gEDA PCB footprints are natively supported by gEDA PCB, pcb-rnd, and Kicad.
+
+Kicad users using pcbnew will find that the footprint has to be imported from within the module editor. There is no other way to import it from the file menu or from the library browser/library configuration menu in pcbnew.
+
+This tool is an effective way to export Hershey font text from Inkscape to footprints for use on PCB layouts in gEDA PCB, pcb-rnd, and Kicad.
+
+It should be noted that pcb-rnd now has multiple font support built in, allowing multiple fonts to be used in a layout with the text tool.
 
 Licence is GPL2, or at your option, a newer GPL licence.
-
-
