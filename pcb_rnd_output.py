@@ -1,6 +1,6 @@
 #! /usr/bin/python
 '''
-Copyright (C) 2017 Erich Heinzle a1039181@gmail.com
+Copyright (C) 2017-2020 Erich Heinzle a1039181@gmail.com
 based on GPL HPGL export code by Aaron Spike, aaron@ekips.org
 
 This program is free software; you can redistribute it and/or modify
@@ -17,16 +17,33 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 '''
-import inkex, simpletransform, cubicsuperpath, simplestyle, cspsubdiv
+import inkex, simpletransform, cubicsuperpath, simplestyle, cspsubdiv, random
 
 class MyEffect(inkex.Effect):
 
-    header = "# Minimal lihata board template\n\nha:pcb-rnd-board-v1 {\n\n# meta for board size\n\n ha:meta {\n   ha:size {\n    x = 210.0mm\n    y = 297.0mm\n   }\n }\n\n# actual PCB data\n ha:data {\n\n# global objects (that are not on layers), e.g. vias and elements\n   li:objects {\n   }\n\n# layers: need two coppers and two silks at least\n\n   li:layers {\n\n    ha:component {\n     visible=1\n     group=0\n\n      li:objects {\n"
-
-    footer = "      }\n    }\n\n    ha:solder {\n     visible=1\n     group=2\n    }\n\n    ha:silk {\n     visible=1\n     group=2\n    }\n\n    ha:silk {\n     visible=1\n     group=0\n    }\n   }\n }\n}\n"
+    header = "li:pcb-rnd-subcircuit-v7 {\n ha:subc.74 {\n  ha:attributes {\n   refdes = U0\n  }\n  ha:data {\n   li:padstack_prototypes {\n   }\n   li:objects {\n   }\n   li:layers {\n"
+    layers = '''    ha:top-sig {\n     lid=0\n     ha:type {\n      copper = 1\n      top = 1\n     }\n
+     li:objects {\n     }\n     ha:combining {\n     }\n    }\n
+    ha:bottom-sig {\n     lid = 1\n     ha:type {\n      bottom = 1\n      copper = 1\n     }\n
+     li:objects {\n     }\n     ha:combining {\n     }\n    }\n
+    ha:top-gnd {\n     lid=2\n     ha:type {\n      copper = 1\n      top = 1\n     }\n
+     li:objects {\n     }\n     ha:combining {\n     }\n    }\n
+    ha:bottom-gnd {\n     lid = 3\n     ha:type {\n      bottom = 1\n      copper = 1\n     }\n
+     li:objects {\n     }\n     ha:combining {\n     }\n    }\n
+    ha:outline {\n     lid = 4\n     ha:type {\n      boundary = 1\n     }\n
+     li:objects {\n     }\n     ha:combining {\n     }\n    }\n
+    ha:bottom-silk {\n     lid = 5\n     ha:type {\n      silk = 1\n      bottom = 1\n     }\n
+     li:objects {\n     }\n     ha:combining {\n     }\n    }\n
+    ha:top-silk {\n     lid = 6\n     ha:type {\n      silk = 1\n      top = 1\n     }\n
+     li:objects {\n'''
+    prefooter = '''     }\n     ha:combining {\n     }\n    }\n
+    ha:subc-aux {\n     lid = 7\n     ha:type {\n      top = 1\n      misc = 1\n      virtual = 1\n     }\n
+     li:objects {\n     }\n     ha:combining {\n     }\n    }\n'''
+    uid_text = ''.join(random.choice("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") for i in range(19))
+    footer = prefooter + "   }\n  }\n  uid = " + uid_text + "AAAAB\n  ha:flags {\n  }\n }\n ha:pixmaps {\n }\n}\n"
 
     lineCount = 1
-
+    
     def __init__(self):
         inkex.Effect.__init__(self)
         self.OptionParser.add_option("-f", "--flatness",
@@ -78,10 +95,10 @@ class MyEffect(inkex.Effect):
                     X = csp[1][0]
                     Y = csp[1][1]
                     if not first:
-                        self.lht.append('       ha:line.%d {\n' % (self.lineCount))
+                        self.lht.append('        ha:line.%d {\n' % (self.lineCount))
 			self.lineCount = self.lineCount + 1
-                        self.lht.append('        x1=%dmil; y1=%dmil; x2=%dmil; y2=%dmil; thickness=%dmil; clearance=40.0mil;\n' % (Xlast/100.0, Ylast/100.0, X/100.0, Y/100.0, self.options.thickness))
-                        self.lht.append('        ha:flags {\n         clearline=1\n        }\n       }\n')
+                        self.lht.append('         x1=%dmil; y1=%dmil; x2=%dmil; y2=%dmil; thickness=%dmil; clearance=40.0mil;\n' % (Xlast/100.0, Ylast/100.0, X/100.0, Y/100.0, self.options.thickness))
+                        self.lht.append('         ha:flags {\n          clearline=1\n         }\n        }\n')
 
                     Xlast = X
                     Ylast = Y
@@ -107,8 +124,9 @@ class MyEffect(inkex.Effect):
             self.groupmat.pop()
 
     def effect(self):
-        self.lht = ['# pcb-rnd layout exported from Inkscape\n']
+        self.lht = ['# pcb-rnd v7 subcircuit exported from Inkscape\n']
         self.lht.append(self.header)
+        self.lht.append(self.layers)
         x0 = self.options.xOrigin
         y0 = self.options.yOrigin
         scale = float(self.options.resolution)/10

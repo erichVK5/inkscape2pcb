@@ -9,7 +9,7 @@
 	<param name="mirror" type="boolean" _gui-text="Mirror Y-axis">TRUE</param>
 	<param name="xOrigin" type="float" min="-100000" max="100000" _gui-text="X-origin (px)">0.0</param>
 	<param name="yOrigin" type="float" min="-100000" max="100000" _gui-text="Y-origin (px)">0.0</param>
-	<param name="resolution" type="int" min="90" max="2048" _gui-text="Resolution (dpi)">1000</param>
+	<param name="resolution" type="int" min="90" max="10000" _gui-text="Resolution (dpi)">1000</param>
 	<param name="thickness" type="int" min="8" max="250" _gui-text="Line thickness (mil/thou)">8</param>
 	<param name="plotInvisibleLayers" type="boolean" _gui-text="Plot invisible layers">FALSE</param>
 	<output>
