@@ -1,5 +1,7 @@
 # inkscape2pcb
-inkscape2pcb contains inkscape extension scripts that allow export of inkscape paths to pcb-rnd subcircuits (.lht) and gEDA PCB footprints (.fp)
+inkscape2pcb contains inkscape extension scripts that allow export of inkscape paths to pcb-rnd subcircuits (.lht) and gEDA PCB footprints (.fp) on the top silk layer.
+
+The pcb-rnd export script has been updated to also export simple polygon paths to the top copper layer. Self intersecting polygons are not exported.
 
 The scripts are based on the HPGL export script that ships with inkscape.
 
@@ -11,13 +13,11 @@ before starting up inkscape again.
 
 On loading, inkscape will find the scripts, at which point the "Save As" menu will allow saving to pcb-rnd .lht subcircuit formats, and also gEDA PCB footprint (.fp) formats.
 
-Currently, the exporter only exports lines and paths as line elements.
+Currently, the exporter only exports lines and paths as line elements. Squares, polygons, circles, ellipses and other types of content are not exported. Accordingly, any object which is to be exported must be converted to a path first.
 
 Line width can be specified in the export dialogue; 8mil is the default minimum (less than this is not necessarily supported by many fabs for silkscreens, for example), and can range up to 250mil. If this is not appropriate, the thickness can be changed further in pcb-rnd or gEDA PCB anyway. 
 
 Currently, the exporter exports to mil units, where 1px in Inkscape = 1 mil in the exported layout. It is recommended that any lines or nodes on lines needing to have a specific coordinates be created, and then each node individually clicked on within Inkscape to allow precise coordinates to be specified for each node. This is a more precise method for specifying geometry than simply clicking with the mouse.
-
-Support for polygon export may be added in the future, if viable.
 
 Exported gEDA PCB footprints are natively supported by gEDA PCB, pcb-rnd, and Kicad.
 
