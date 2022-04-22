@@ -2,16 +2,14 @@
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
 	<_name>gEDA PCB Output</_name>
 	<id>org.geda-project</id>
-	<dependency type="extension">org.inkscape.output.svg.inkscape</dependency>
 	<dependency type="executable" location="extensions">geda_pcb_output.py</dependency>
-	<dependency type="executable" location="extensions">inkex.py</dependency>
-	<param name="flat" type="float" min="0.001" max="1000" _gui-text="geda pcb output flatness">0.2</param>
-	<param name="mirror" type="boolean" _gui-text="Mirror Y-axis">TRUE</param>
-	<param name="xOrigin" type="float" min="-100000" max="100000" _gui-text="X-origin (px)">0.0</param>
-	<param name="yOrigin" type="float" min="-100000" max="100000" _gui-text="Y-origin (px)">0.0</param>
-	<param name="resolution" type="int" min="90" max="2048" _gui-text="Resolution (dpi)">1000</param>
-	<param name="thickness" type="int" min="8" max="250" _gui-text="Line thickness (mil/thou)">8</param>
-	<param name="plotInvisibleLayers" type="boolean" _gui-text="Plot invisible layers">FALSE</param>
+	<param name="flat" type="float" min="0.001" max="1000" gui-text="geda pcb output flatness">0.2</param>
+	<param name="mirror" type="boolean" gui-text="Mirror Y-axis">TRUE</param>
+	<param name="xOrigin" type="float" min="-100000" max="100000" gui-text="X-origin (px)">0.0</param>
+	<param name="yOrigin" type="float" min="-100000" max="100000" gui-text="Y-origin (px)">0.0</param>
+	<param name="scaling" type="float" min="0.1" max="100.0" gui-text="Scaling">1.0</param>
+	<param name="thickness" type="int" min="8" max="250" gui-text="Line thickness (mil/thou)">8</param>
+	<param name="plotInvisibleLayers" type="boolean" gui-text="Plot invisible layers">FALSE</param>
 	<output>
 		<extension>.fp</extension>
 		<mimetype>image/pcb</mimetype>
@@ -20,7 +18,7 @@
 		<dataloss>true</dataloss>
 	</output>
 	<script>
-		<command reldir="extensions" interpreter="python">geda_pcb_output.py</command>
+		<command location="inx" interpreter="python">geda_pcb_output.py</command>
 		<helper_extension>org.inkscape.output.svg.inkscape</helper_extension>
 	</script>
 </inkscape-extension>
