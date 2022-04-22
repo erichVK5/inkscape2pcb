@@ -1,6 +1,8 @@
 # inkscape2pcb
 inkscape2pcb contains inkscape extension scripts that allow export of inkscape paths to pcb-rnd subcircuits (.lht) and gEDA PCB footprints (.fp) on the top silk layer.
 
+![example export](exported-simple-polygons-from-inkscape.png)
+
 The pcb-rnd export script has been updated to also export simple polygon paths to the top copper layer. Self intersecting polygons are not exported.
 
 The scripts are based on the HPGL export script that ships with inkscape.
@@ -11,7 +13,7 @@ The scripts need to be added to your local inkscape extension script directory, 
 
 before starting up inkscape again.
 
-On loading, inkscape will find the scripts, at which point the "Save As" menu will allow saving to pcb-rnd .lht subcircuit formats, and also gEDA PCB footprint (.fp) formats.
+On loading, inkscape will find the scripts, at which point the "Save As" menu will allow saving to pcb-rnd (.lht) subcircuit formats, and also gEDA PCB footprint (.fp) formats.
 
 Currently, the exporter only exports lines and paths as line elements. Squares, polygons, circles, ellipses and other types of content are not exported. Accordingly, any object which is to be exported must be converted to a path first.
 
@@ -27,8 +29,8 @@ This tool is an effective way to export Hershey font text from Inkscape to footp
 
 It should be noted that pcb-rnd now has multiple font support built in, allowing multiple fonts to be used in a layout with the text tool.
 
-The gEDA (.fp) exporter has been updated to work with Inkscape 1.1
+The pcb-rnd (.lht) exporter and gEDA (.fp) exporter have been updated to work with Inkscape 1.1
 
-Work on the pcb-rnd (.lht) exporter is underway.
+They have not been tested with Inkscape v1.0 but should work with it, as API and python 2.x -> 3.x changes occurred at the Inkscape v0.9x to v1.0 transition.
 
 Licence is GPL2, or at your option, a newer GPL licence.
