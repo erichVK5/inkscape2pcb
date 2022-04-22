@@ -4,7 +4,7 @@
 	<id>org.geda-project</id>
 	<dependency type="executable" location="extensions">geda_pcb_output.py</dependency>
 	<param name="flat" type="float" min="0.001" max="1000" gui-text="geda pcb output flatness">0.2</param>
-	<param name="mirror" type="boolean" gui-text="Mirror Y-axis">TRUE</param>
+	<param name="mirror" type="boolean" gui-text="Mirror Y-axis">FALSE</param>
 	<param name="xOrigin" type="float" min="-100000" max="100000" gui-text="X-origin (px)">0.0</param>
 	<param name="yOrigin" type="float" min="-100000" max="100000" gui-text="Y-origin (px)">0.0</param>
 	<param name="scaling" type="float" min="0.1" max="100.0" gui-text="Scaling">1.0</param>
