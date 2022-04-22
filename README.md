@@ -27,4 +27,8 @@ This tool is an effective way to export Hershey font text from Inkscape to footp
 
 It should be noted that pcb-rnd now has multiple font support built in, allowing multiple fonts to be used in a layout with the text tool.
 
+The gEDA (.fp) exporter has been updated to work with Inkscape 1.1
+
+Work on the pcb-rnd (.lht) exporter is underway.
+
 Licence is GPL2, or at your option, a newer GPL licence.
